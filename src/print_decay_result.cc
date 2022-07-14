@@ -1,6 +1,7 @@
 #include <iostream>
 #include <type_traits>
 #include <typeinfo>
+#include <thread>
 template <typename T, typename U>
 struct decay_equiv : 
     std::is_same<typename std::decay<T>::type, U>::type 
@@ -17,4 +18,5 @@ int main()
     int a = 1 ;
     myfunc<::std::decay<int(int)>::type>();
     myfunc<decltype(a)>();
+    myfunc<std::invoke_result_t<decltype(std::thread::hardware_concurrency)>>();
 }
